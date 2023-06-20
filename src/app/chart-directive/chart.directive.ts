@@ -106,6 +106,8 @@ export class ChartDirective implements OnInit {
       if (states.indexOf(this.data[i][this.label[0]]) === -1) {
         states.push(this.data[i][this.label[0]]);
       }
+
+      console.log('asdasdasdsa', states);
     }
     var keys = this.label.slice(1);
     var x = d3
@@ -157,6 +159,7 @@ export class ChartDirective implements OnInit {
         (d) => d,
         (e) => e.data[self.label[0]]
       );
+
     bars.exit().remove();
     bars
       .enter()
@@ -164,10 +167,10 @@ export class ChartDirective implements OnInit {
       .attr('width', x.bandwidth())
       .on('click', function (d, i) {
         tooltip.style('display', 'none');
-        console.log(d.keys);
+        console.log('asdasdasdsa', d.keys);
         if (self.drillthrough) {
           self.onDrillthrough.emit({
-            key: self.data[i][self.label[0]],
+            key: self.data[i][self.label[3]],
             value: d[1] - d[0],
           });
         }
@@ -179,13 +182,18 @@ export class ChartDirective implements OnInit {
           tooltip.style('display', 'block');
           if (self.displaylabel.length > 0) {
             tooltip.html(
-              self.displaylabel[0] +
+              self.displaylabel[1] +
                 ': ' +
-                self.data[i][self.label[0]] +
+                self.data[i][self.label[1]] +
                 '<br>' +
-                self.displayvalue[0] +
+                self.displaylabel[2] +
                 ': ' +
-                (d[1] - d[0])
+                self.data[i][self.label[2]] +
+                '<br>' +
+                self.displaylabel[3] +
+                ': ' +
+                self.data[i][self.label[3]] +
+                '<br>'
             );
           } else {
             tooltip.html(
@@ -253,9 +261,10 @@ export class ChartDirective implements OnInit {
         return color(i);
       });
     g.append('text')
-      .attr('x', 10)
-      .attr('y', 32)
+      .attr('x', 0)
+      .attr('y', 30)
       .attr('dy', '-0.5em')
+      .style('font-size', '5px')
       .text((d, i) => keys[i]);
   }
 
