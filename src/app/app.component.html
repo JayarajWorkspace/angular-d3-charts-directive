@@ -1,0 +1,17 @@
+<div
+  charts
+  [type]="'stacked'"
+  [config]="stackBarConfig"
+  [data]="stackBarData"
+  [color]="stackBarColors"
+  [drillthrough]="true"
+  [fontcolor]="'#000000'"
+  (onDrillthrough)="drilledstackBar($event)"
+  [tooltip]="true"
+  [tooltipstyle]="tooltipStyle"
+  [label]="stackBarLabels"
+  [value]="stackBarValue"
+  [displaylabel]="stackBarDisplayLabels"
+  [displayvalue]="stackBarDisplayValue"
+  [fontsize]="9"
+></div>
